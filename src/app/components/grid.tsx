@@ -29,10 +29,10 @@ const AppGrid = () => {
   return (
     <Box p={2}>
       <Typography variant="h4" gutterBottom>Previsão do Tempo</Typography>
-      <Grid container spacing={2}>
+      <Grid className="container" container spacing={2}>
 
         {/* Coluna de quando foi feita a previsão */}
-        <Grid item xs={3}>
+        <Grid className="gridWhen" item xs={3}>
           <Typography variant="h6">Previsão feita:</Typography>
           {whenForecastMade.map((tempo, index) => (
             // <Typography variant="body1" key={index}>{tempo}</Typography>
@@ -40,9 +40,10 @@ const AppGrid = () => {
           ))}
         </Grid>
 
+        <Grid className='gridDaysForecasts'>
           {/* Colunas dos dias Previstos */}
         {forecastsResp.map((dayForecastPayload, indexDia) => (
-          <Grid item xs={3} key={indexDia}>
+          <Grid className="gridNameDay" item xs={3} key={indexDia}>
             <Typography variant="h6">{dayForecastPayload.madeIn}</Typography>
             {/* Coluna do dia Previsto */}
             {dayForecastPayload.daysForecasts.map((dayForecast, indexDayForecast) => {
@@ -57,6 +58,7 @@ const AppGrid = () => {
             })}
           </Grid>
         ))}
+      </Grid>
       </Grid>
     </Box>
   );

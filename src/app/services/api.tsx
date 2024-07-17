@@ -110,4 +110,6 @@ const previsoesQuinta: DayForecast[] = [
 export const previsoesResponse = [
     new ForecastPayload('Hoje', previsoesHoje), 
     new ForecastPayload('Amanha', previsoesAmanha), 
-    new ForecastPayload('Quinta', previsoesQuinta)]
+    new ForecastPayload('Quinta', previsoesQuinta),
+    new ForecastPayload('Sexta', previsoesQuinta),
+    new ForecastPayload('Sabado', previsoesQuinta)]
