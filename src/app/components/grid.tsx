@@ -2,33 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Paper, Box, Typography } from '@mui/material';
 import { previsoesResponse } from '../services/api';
 import { DayForecast } from '../models/dayForecast';
+import { WhenForecastCard } from './whenForecastCard';
+import { ForecastCard } from './forecastCard';
 // import axios from 'axios';
-
-
-function ForecastCard({ dayForecast }: { dayForecast: DayForecast }){
-  return (
-    <Paper elevation={3} style={{ padding: 16 }}>
-      <Box style={{color:"green"}}>
-      {dayForecast.forecastSources.map((forecastSource, index) => (
-          <Typography>{forecastSource.name} - {forecastSource.minTemperature} {forecastSource.maxTemperature}</Typography>
-            
-          ))}        
-      </Box>
-    </Paper>)
-}
-
-const PrevisaoFeitaCard = ({ forecastMadeIn }: {forecastMadeIn: string}) => (
-  <Paper elevation={3} style={{ padding: 16 }}>
-    <Box style={{color:"blue"}}>
-      <Typography>{forecastMadeIn}</Typography>
-
-    </Box>
-  </Paper>
-);
-
-
-// const previsaoFeitaEm = ['Hoje', '1 dia atrás', '3 dias atrás', '5 dias atrás'];
-// const diasPrevistos = ['DIA 06/02 - TER(Hoje)', 'DIA 07/02 - QUA(Amanha)', 'DIA 08/02 - QUI'];
 
 
 const AppGrid = () => {
@@ -60,7 +36,7 @@ const AppGrid = () => {
           <Typography variant="h6">Previsão feita:</Typography>
           {whenForecastMade.map((tempo, index) => (
             // <Typography variant="body1" key={index}>{tempo}</Typography>
-            <PrevisaoFeitaCard forecastMadeIn={tempo} />
+            <WhenForecastCard forecastMadeIn={tempo} />
           ))}
         </Grid>
 
