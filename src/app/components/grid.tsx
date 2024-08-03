@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Paper, Box, Typography } from '@mui/material';
-import { previsoesResponse } from '../services/api';
-import { DayForecast } from '../models/dayForecast';
+import { API } from '../services/api';
 import { WhenForecastCard } from './whenForecastCard';
 import { ForecastCard } from './forecastCard';
-// import axios from 'axios';
+import { ForecastPayload } from '../models/forecastPayload';
 
 
 const AppGrid = () => {
-  
-  // useEffect(() => {
-  //   setPrevisoes(previsoesMock);
-  //   const fetchData = async () => {
-  //     try {
-  //       // const response = await axios.get('URL_DA_SUA_API');
-  //       // const response: React.SetStateAction<never[]> = []
-  //     } catch (error) {
-  //       console.error('Erro ao buscar dados', error);
-  //     }
-  //   };
 
-  //   fetchData();
-  // }, []);
+  const [forecastsResp, setForecastsResp] = useState<ForecastPayload[]>([]);
+  const [count, setCount] = useState(0);
+  const whenForecastMade = ['Hoje', '1 dia atrás', '3 dias atrás', '5 dias atrás'];  
 
-  const whenForecastMade = ['Hoje', '1 dia atrás', '3 dias atrás', '5 dias atrás'];
-  const forecastsResp = previsoesResponse!
-  // const diasPrevistos = ['DIA 06/02 - TER(Hoje)', 'DIA 07/02 - QUA(Amanha)', 'DIA 08/02 - QUI'];
+  useEffect(() => {
+    
+      API.getWeekInfo().then(
+        (data) => {
+          setCount(count+1);          
+          
+          setForecastsResp(data);
+        })
+        .catch((err) => {
+          console.log(err);        
+        });
+      }
+      , []);
+    
   return (
     <Box p={2}>
       <Typography variant="h4" gutterBottom>Previsão do Tempo</Typography>
@@ -34,9 +34,8 @@ const AppGrid = () => {
         {/* Coluna de quando foi feita a previsão */}
         <Grid className="gridWhen" item xs={3}>
           <Typography variant="h6">Previsão feita:</Typography>
-          {whenForecastMade.map((tempo, index) => (
-            // <Typography variant="body1" key={index}>{tempo}</Typography>
-            <WhenForecastCard forecastMadeIn={tempo} />
+          {whenForecastMade.map((tempo, index) => (            
+            <WhenForecastCard forecastMadeIn={tempo} key={index}/>
           ))}
         </Grid>
 

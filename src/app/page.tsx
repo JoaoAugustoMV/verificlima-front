@@ -5,7 +5,7 @@ import AppGrid from "./components/grid";
 
 export default function Home() {
   return (
-  <AppGrid/>
+    <AppGrid/>    
   );
 
 }
